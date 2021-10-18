@@ -1,11 +1,17 @@
-@echo off
+
 :menu
 echo.
 set /p password=请输入密码:
 echo.
 if /i "%password%"=="sjh" (goto next) else (echo; 密码错误,请重新输入&&goto menu)
 :next
-start /min "" "./app/Visual Studio Code.lnk" "D:\workplace\doc\whaty_work" &
+
+if "%1"=="hide" goto CmdBegin
+start mshta vbscript:createobject("wscript.shell").run("""%~0"" hide",0)(window.close)&&exit
+:CmdBegin
+
+@echo off
+start /min "" "%1/app/Visual Studio Code.lnk" 
 start /min "" "./app/ByWave.lnk" ""  &
 start /min "" "./app/Everything - 快捷方式.lnk"  &
 start /min "" "./app/Fork.lnk"  &
@@ -27,5 +33,4 @@ start /min "" "./app/百度网盘.lnk" &
 start /min "" "./app/腾讯QQ.lnk" &
 start /min "" "./app/钉钉.lnk" &
 start /min "" "./app/网卡切换.lnk" &
-exit
 exit
